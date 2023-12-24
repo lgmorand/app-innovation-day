@@ -10,15 +10,19 @@ jobs:
   scan:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      
+
       - uses: actions/checkout@v3
 
       - name: Install and run Spectral CI
         uses: spectralops/spectral-github-action@v3
         with:
-          spectral-dsn: ${{ secrets.SPECTRAL_DSN }}
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok  --include-tags base,audit
 
       - name: Container scanning
