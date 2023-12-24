@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Hello";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenue</h1>
+    <p> Message: @{
+            @(Model.Message)
+        }</p>
+    <p>
+        Secret: @{
+            @Model.Secret
+        }
+    </p>
+</div>
