@@ -13,17 +13,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: SAST
-        run: echo Hello, world!
-      
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/dotnet@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          
       - name: Install and run Spectral CI
         uses: spectralops/spectral-github-action@v3
         with:
@@ -34,8 +25,31 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+  sca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/dotnet@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        working-directory: ./src
+        
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Scan Dockerfile
+        run: "Hello, world!"
+
   build:
-    needs: scan
+    needs: [scan, sca]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
