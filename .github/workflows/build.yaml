@@ -17,7 +17,8 @@ jobs:
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok --engines secrets --include-tags base,audit
-  iac:
+
+  IaC:
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -29,8 +30,20 @@ jobs:
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok --engines iac --include-tags base,azure
-                      
-  sca:
+  SAST:
+    runs-on: ubuntu-latest
+    env:
+      SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: scan IaC with Spectral
+        uses: spectralops/spectral-github-action@v3
+        with:
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-args: scan --ok --engines iac --include-tags base,azure
+
+  SCA:
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -60,7 +73,8 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
-  docker:
+
+  Docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -80,7 +94,7 @@ jobs:
         working-directory: ./src
 
   build:
-    needs: [secrets, sca, docker,iac]
+    needs: [secrets, SCA, Docker,IaC]
     runs-on: ubuntu-latest
 
     steps:
@@ -95,3 +109,43 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
         working-directory: ./src
+  
+  deployToDev:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/CafeReadConf.sln
+      
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+        working-directory: ./src
+  
+  DAST:
+    needs: [deployToDev]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+
+  LoadTest:
+    needs: [deployToDev, DAST]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+
+  deployToProd:
+    needs: [LoadTest]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
