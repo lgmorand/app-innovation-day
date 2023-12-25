@@ -65,7 +65,7 @@ jobs:
           mv hadolint-Linux-x86_64 hadolint
 
           echo 'Start Dockerfile lint...'
-          ./hadolint dockerfile -f tty > results.txt
+          ./hadolint Dockerfile -f tty > results.txt
 
           cat results.txt
         working-directory: ./src
