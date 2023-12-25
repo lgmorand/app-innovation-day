@@ -68,6 +68,7 @@ jobs:
           ./hadolint dockerfile -f tty > results.txt
 
           cat results.txt
+        working-directory: ./src
 
   build:
     needs: [secrets, sca, docker,iac]
