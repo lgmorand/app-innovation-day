@@ -94,3 +94,4 @@ jobs:
       
       - name: Build
         run: dotnet build --no-restore --configuration Release
+        working-directory: ./src
