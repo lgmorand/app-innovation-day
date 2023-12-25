@@ -32,6 +32,8 @@ jobs:
                       
   sca:
     runs-on: ubuntu-latest
+    env:
+      SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
       - uses: actions/checkout@v3
 
@@ -40,6 +42,12 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore ./src/CafeReadConf.sln
+      
+      - name: scan OSS with Spectral
+        uses: spectralops/spectral-github-action@v3
+        with:
+          spectral-dsn: ${{ env.SPECTRAL_DSN }}
+          spectral-args: scan --ok --engines oss --include-tags base,audit
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/dotnet@master
