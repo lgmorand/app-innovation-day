@@ -116,16 +116,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-
-      - name: Restore dependencies
-        run: dotnet restore ./src/CafeReadConf.sln
-      
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-        working-directory: ./src
   
   DAST:
     needs: [deployToDev]
@@ -136,7 +126,7 @@ jobs:
 
 
   LoadTest:
-    needs: [deployToDev, DAST]
+    needs: [deployToDev]
     runs-on: ubuntu-latest
 
     steps:
@@ -144,7 +134,7 @@ jobs:
 
 
   deployToProd:
-    needs: [LoadTest]
+    needs: [LoadTest, DAST]
     runs-on: ubuntu-latest
 
     steps:
