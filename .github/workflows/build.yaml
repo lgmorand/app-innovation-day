@@ -23,7 +23,7 @@ jobs:
         uses: spectralops/spectral-github-action@v3
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
-          spectral-args: scan --ok  --include-tags base,audit
+          spectral-args: scan --ok --engines secrets,iac,oss  --include-tags base,audit,azure
 
       - name: Container scanning
         run: |
