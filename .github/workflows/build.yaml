@@ -117,12 +117,7 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./myapp
         working-directory: ./src
-      
-      - run: ls -R
 
-      - run: ls -R 
-        working-directory: ./src
-        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:

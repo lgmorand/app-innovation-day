@@ -1,0 +1,3 @@
+10020	IGNORE	(Missing Anti-clickjacking Header)
+10021	IGNORE	(X-Content-Type-Options Header Missing)
+10036	IGNORE	(Server Leaks Version Information via "Server" HTTP Response Header Field) 

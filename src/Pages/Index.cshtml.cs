@@ -27,6 +27,7 @@ namespace CafeReadConf.Pages
             }
             return value;
         }
+        
         public void OnGet()
         {
 
