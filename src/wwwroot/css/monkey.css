@@ -1,0 +1,327 @@
+﻿.password {
+    --background: #ffffff;
+    --text-color: #414856;
+    --border-radius: 8px;
+    --width: 210px;
+    --height: 55px;
+    background: var(--background);
+    width: var(--width);
+    height: var(--height);
+    padding: 0 var(--height) 0 20px;
+    position: relative;
+    line-height: var(--height);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+}
+
+    .password .password-checkbox {
+        position: absolute;
+        width: var(--height);
+        height: 100%;
+        right: 0;
+        top: 0;
+        margin: 0;
+        z-index: 1;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .password .monkey,
+    .password .monkey-hands {
+        position: absolute;
+        width: var(--height);
+        height: 100%;
+        right: 0;
+        top: 0;
+        margin: 0;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .password .monkey svg,
+        .password .monkey-hands svg {
+            height: calc(var(--height) - 20px);
+            width: calc(var(--height) - 20px);
+        }
+
+    .password .monkey {
+        cursor: pointer;
+    }
+
+        .password .monkey::before {
+            content: "";
+            position: absolute;
+            transition: all 0.2s ease;
+            width: 3px;
+            height: 0px;
+            border-radius: 50%;
+            top: 36px;
+            border-bottom: 3px solid #3C302A;
+        }
+
+    .password .monkey-hands {
+        z-index: 2;
+        perspective: 80px;
+        pointer-events: none;
+    }
+
+        .password .monkey-hands svg {
+            transition: transform 0.2s ease-in, opacity 0.1s;
+            transform-origin: 50% 100%;
+        }
+
+    .password .password-wrapper {
+        overflow: hidden;
+        position: relative;
+    }
+
+        .password .password-wrapper .password-input,
+        .password .password-wrapper .password-text,
+        .password .password-wrapper .password-dots {
+            letter-spacing: 2px;
+            color: var(--text-color);
+        }
+
+        .password .password-wrapper .password-input {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            outline: none;
+            padding: 0;
+            background: none;
+        }
+
+        
+
+
+    .password.show .monkey-hands svg {
+        transform: perspective(100px) rotateX(-90deg);
+        perspective-origin: bottom;
+        opacity: var(--opacity, 0);
+        transition: transform 0.2s ease, opacity 0.1s 0.1s;
+    }
+
+    .password.show .monkey::before {
+        content: "";
+        border-radius: 45%;
+        width: 9px;
+        height: 6px;
+        border: 0;
+        border-bottom: 2px solid #3C302A;
+        top: 30px;
+    }
+
+    .password.show .password-wrapper .password-text > span {
+        -webkit-animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards;
+        animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards;
+    }
+
+        .password.show .password-wrapper .password-text > span:nth-child(1) {
+            -webkit-animation-delay: 0.04s;
+            animation-delay: 0.04s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(2) {
+            -webkit-animation-delay: 0.08s;
+            animation-delay: 0.08s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(3) {
+            -webkit-animation-delay: 0.12s;
+            animation-delay: 0.12s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(4) {
+            -webkit-animation-delay: 0.16s;
+            animation-delay: 0.16s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(5) {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(6) {
+            -webkit-animation-delay: 0.24s;
+            animation-delay: 0.24s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(7) {
+            -webkit-animation-delay: 0.28s;
+            animation-delay: 0.28s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(8) {
+            -webkit-animation-delay: 0.32s;
+            animation-delay: 0.32s;
+        }
+
+        .password.show .password-wrapper .password-text > span:nth-child(9) {
+            -webkit-animation-delay: 0.36s;
+            animation-delay: 0.36s;
+        }
+
+    .password.show .password-wrapper .password-text.cursor > span {
+        -webkit-animation: none;
+        animation: none;
+        opacity: var(--opacity, 1);
+    }
+
+        .password.show .password-wrapper .password-text.cursor > span:last-child {
+            -webkit-animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+            animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+            opacity: var(--opacity, 0);
+        }
+
+    .password.show .password-wrapper .password-dots.cursor::after {
+        display: none;
+    }
+
+    .password:not(.show) .password-wrapper .password-text.cursor::after {
+        display: none;
+    }
+
+    .password:not(.show) .password-wrapper .password-dots > span {
+        -webkit-animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+        animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+    }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(1) {
+            -webkit-animation-delay: 0.04s;
+            animation-delay: 0.04s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(2) {
+            -webkit-animation-delay: 0.08s;
+            animation-delay: 0.08s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(3) {
+            -webkit-animation-delay: 0.12s;
+            animation-delay: 0.12s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(4) {
+            -webkit-animation-delay: 0.16s;
+            animation-delay: 0.16s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(5) {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(6) {
+            -webkit-animation-delay: 0.24s;
+            animation-delay: 0.24s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(7) {
+            -webkit-animation-delay: 0.28s;
+            animation-delay: 0.28s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(8) {
+            -webkit-animation-delay: 0.32s;
+            animation-delay: 0.32s;
+        }
+
+        .password:not(.show) .password-wrapper .password-dots > span:nth-child(9) {
+            -webkit-animation-delay: 0.36s;
+            animation-delay: 0.36s;
+        }
+
+    .password:not(.show) .password-wrapper .password-dots.cursor > span {
+        -webkit-animation: none;
+        animation: none;
+        opacity: var(--opacity, 1);
+    }
+
+        .password:not(.show) .password-wrapper .password-dots.cursor > span:last-child {
+            -webkit-animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+            animation: bounce 1s cubic-bezier(0, 1.26, 0.42, 1.26) forwards alternate;
+            opacity: var(--opacity, 0);
+        }
+
+@-webkit-keyframes bounce {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    30% {
+        transform: translateY(0px);
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+    }
+
+    35% {
+        transform: translateY(1px);
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    30% {
+        transform: translateY(0px);
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+    }
+
+    35% {
+        transform: translateY(1px);
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@-webkit-keyframes blink {
+    25% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+    25% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+body {
+    background: #E8EBF3;
+    height: 100vh;
+    font: 400 16px "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
