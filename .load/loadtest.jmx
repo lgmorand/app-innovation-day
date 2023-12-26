@@ -27,7 +27,7 @@
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <stringProp name="ThreadGroup.duration">60</stringProp>
+        <!-- <stringProp name="ThreadGroup.duration">60</stringProp> -->
       </kg.apc.jmeter.threads.UltimateThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="lasttimestamp" enabled="true">
