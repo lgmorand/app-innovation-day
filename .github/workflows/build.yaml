@@ -162,11 +162,23 @@ jobs:
           cmd_options: '-a'
 
   LoadTest:
-    needs: [deployToDev]
+    # needs: [deployToDev]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+      - name: Login to Azure
+        uses: azure/login@v1
+        continue-on-error: false
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      - name: 'Azure Load Testing'
+        uses: azure/load-testing@v1
+        with:
+          resourceGroup: 'rg-innovationday'
+          loadTestConfigFile: 'loadtest.yaml'
+          loadTestResource: 'loadtestinnovationday'
 
 
   deployToProd:
