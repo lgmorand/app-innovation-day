@@ -177,7 +177,7 @@ jobs:
         uses: azure/load-testing@v1
         with:
           resourceGroup: 'rg-innovationday'
-          loadTestConfigFile: 'loadtest.yaml'
+          loadTestConfigFile: '.load/loadtest.yaml'
           loadTestResource: 'loadtestinnovationday'
 
 
