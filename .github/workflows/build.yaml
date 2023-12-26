@@ -56,6 +56,10 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ./src/CafeReadConf.sln
       
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ./myapp
+        working-directory: ./src
+        
       - name: scan OSS with Spectral
         uses: spectralops/spectral-github-action@v3
         with:
