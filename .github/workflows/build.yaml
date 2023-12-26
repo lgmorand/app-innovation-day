@@ -141,7 +141,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'innovationday'
+          app-name: 'innovationdaydev'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E4458A4B260496ABF1A40FBAEE44461 }}
           package: .
@@ -162,7 +162,7 @@ jobs:
           cmd_options: '-a'
 
   LoadTest:
-    # needs: [deployToDev]
+    needs: [deployToDev]
     runs-on: ubuntu-latest
 
     steps:
@@ -186,4 +186,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'innovationday'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E4458A4B260496ABF1A40FBAEE44461 }}
+          package: .
