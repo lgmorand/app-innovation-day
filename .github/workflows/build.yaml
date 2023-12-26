@@ -59,7 +59,7 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./myapp
         working-directory: ./src
-        
+
       - name: scan OSS with Spectral
         uses: spectralops/spectral-github-action@v3
         with:
@@ -99,7 +99,7 @@ jobs:
 
   build:
     needs: [secrets, SCA, Docker, IaC, SAST]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -117,7 +117,12 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./myapp
         working-directory: ./src
+      
+      - run: ls -R
 
+      - run: ls -R 
+        working-directory: ./src
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
