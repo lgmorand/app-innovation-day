@@ -57,7 +57,7 @@ jobs:
         run: dotnet restore ./src/CafeReadConf.sln
       
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./myapp
+        run: dotnet publish -c Release -o ./myapp --property WarningLevel=0
         working-directory: ./src
 
       - name: scan OSS with Spectral
