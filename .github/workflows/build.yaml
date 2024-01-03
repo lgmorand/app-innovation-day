@@ -115,7 +115,7 @@ jobs:
         working-directory: ./src
       
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./myapp
+        run: dotnet publish -c Release -o ./myapp --property WarningLevel=0
         working-directory: ./src
 
       - name: Upload artifact for deployment job
