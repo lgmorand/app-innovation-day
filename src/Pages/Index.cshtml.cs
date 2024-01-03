@@ -1,5 +1,8 @@
+using Azure.Data.Tables;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Concurrent;
 using System.Configuration;
 
 namespace CafeReadConf.Pages
@@ -7,18 +10,27 @@ namespace CafeReadConf.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public string Message { get; set; }
         public string Secret { get; set; }
+        public List<User> Users { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            Message = GetProperty("message");
-            Secret = GetProperty("secret");
+            Secret = GetConfig("secret");
+            Secret = "DefaultEndpointsProtocol=https;AccountName=stoappinnoday;AccountKey=Mb9x7U5QmMclkjjMtvVabO7FzThE1Ylk2mKmhh5phZjPWtjMxgh8gpVN5/m7csDTnufoDQw0HNeO+AStX4xvrA==;EndpointSuffix=core.windows.net";
+            ReadItems(Secret);
+
         }
 
+        /// <summary>
+        /// Read data from Azure Table Storage
+        /// </summary>
+        private async void ReadItems(string connString)
+        {
+            Users = await new TableStorageService(connString).GetUsers();
+        }
 
-        private string GetProperty(string key)
+        private string GetConfig(string key)
         {
             string value =  System.Configuration.ConfigurationManager.AppSettings[key];
             if(string.IsNullOrEmpty(value))
@@ -26,11 +38,6 @@ namespace CafeReadConf.Pages
                 value = Environment.GetEnvironmentVariable(key);
             }
             return value;
-        }
-        
-        public void OnGet()
-        {
-
         }
     }
 }

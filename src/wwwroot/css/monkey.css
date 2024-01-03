@@ -1,8 +1,18 @@
-﻿.password {
+﻿table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+td {
+    padding: 10px;
+}
+
+.password {
     --background: #ffffff;
     --text-color: #414856;
     --border-radius: 8px;
-    --width: 210px;
+    --width: 510px;
     --height: 55px;
     background: var(--background);
     width: var(--width);
@@ -318,10 +328,31 @@
 
 body {
     background: #E8EBF3;
-    height: 100vh;
-    font: 400 16px "Poppins", sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+}
+
+
+#users td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#users tr:hover {
+    background-color: #ddd;
+}
+
+#users th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
 }
