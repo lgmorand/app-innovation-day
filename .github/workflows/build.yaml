@@ -128,8 +128,8 @@ jobs:
     needs: [build]
     runs-on: windows-latest
     environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      name: 'dev'
+      url: ${{ steps.deploy-to-webapp-dev.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -138,7 +138,7 @@ jobs:
           name: .net-app
 
       - name: Deploy to Azure Web App
-        id: deploy-to-webapp
+        id: deploy-to-webapp-dev
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'innovationday-dev'
@@ -184,6 +184,9 @@ jobs:
   deployToProd:
     needs: [LoadTest, DAST]
     runs-on: ubuntu-latest
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
