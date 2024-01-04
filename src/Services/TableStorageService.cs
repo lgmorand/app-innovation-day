@@ -15,16 +15,32 @@ namespace CafeReadConf
             _connString = connString;
         }
 
+        /// <summary>
+        /// Get TableClient from Azure Table Storage
+        /// </summary>
+        /// <returns></returns>
         private async Task<TableClient> GetTableClient()
         {
-            //var tableServiceClient = new TableServiceClient(uri, new DefaultAzureCredential());
+            TableServiceClient serviceClient;
 
-            var serviceClient = new TableServiceClient(_connString);
+            if(string.IsNullOrEmpty(_connString)) // mode MSI
+            {
+                serviceClient = new TableServiceClient(new Uri("https://stoappinnoday.table.core.windows.net/"), new DefaultAzureCredential());
+            }
+            else // mode connection string
+            {
+                serviceClient = new TableServiceClient(_connString);
+            }
+
             var tableClient = serviceClient.GetTableClient(TableName);
             return tableClient;
         }
 
 
+        /// <summary>
+        /// Get all users from Azure Table Storage
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<User>> GetUsers()
         {
             var tableClient = await GetTableClient();
@@ -37,18 +53,5 @@ namespace CafeReadConf
 
             return users;
         }
-
-
-        //var tableClient = new TableClient("DefaultEndpointsProtocol=https;AccountName=stoappinnoday;AccountKey=Mb9x7U5QmMclkjjMtvVabO7FzThE1Ylk2mKmhh5phZjPWtjMxgh8gpVN5/m7csDTnufoDQw0HNeO+AStX4xvrA==;EndpointSuffix=core.windows.net", "users");
-
-        //Pageable<TableEntity> queryResultsFilter = tableClient.Query<TableEntity>();
-
-        //    // Iterate the <see cref="Pageable"> to access all queried entities.
-        //    foreach (TableEntity qEntity in queryResultsFilter)
-        //    {
-        //        Console.WriteLine($"{qEntity.GetString("FirstName")}: {qEntity.GetString("LastName")}");
-        //    }
-
-        //    return null;
     }
 }

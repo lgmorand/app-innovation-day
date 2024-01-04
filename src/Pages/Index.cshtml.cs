@@ -17,7 +17,6 @@ namespace CafeReadConf.Pages
         {
             _logger = logger;
             Secret = GetConfig("secret");
-            Secret = "DefaultEndpointsProtocol=https;AccountName=stoappinnoday;AccountKey=Mb9x7U5QmMclkjjMtvVabO7FzThE1Ylk2mKmhh5phZjPWtjMxgh8gpVN5/m7csDTnufoDQw0HNeO+AStX4xvrA==;EndpointSuffix=core.windows.net";
             ReadItems(Secret);
 
         }
