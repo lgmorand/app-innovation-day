@@ -111,7 +111,7 @@ jobs:
         run: dotnet restore ./src/CafeReadConf.sln
       
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build --no-restore --configuration Release --property WarningLevel=0
         working-directory: ./src
       
       - name: dotnet publish
