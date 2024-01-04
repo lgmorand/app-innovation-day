@@ -43,14 +43,22 @@ namespace CafeReadConf
         /// <returns></returns>
         public async Task<List<User>> GetUsers()
         {
-            var tableClient = await GetTableClient();
             var users = new List<User>();
-            Pageable<User> queryResultsFilter = tableClient.Query<User>();
-            foreach (User qEntity in queryResultsFilter)
-            {
-              users.Add(qEntity);
-            }
 
+            try
+            {
+                var tableClient = await GetTableClient();
+                Pageable<User> queryResultsFilter = tableClient.Query<User>();
+                foreach (User qEntity in queryResultsFilter)
+                {
+                    users.Add(qEntity);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
             return users;
         }
     }
