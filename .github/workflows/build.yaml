@@ -36,12 +36,9 @@ jobs:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: scan IaC with Spectral
-        uses: spectralops/spectral-github-action@v3
+      - uses: bearer/bearer-action@v2
         with:
-          spectral-dsn: ${{ env.SPECTRAL_DSN }}
-          spectral-args: scan --ok --engines iac --include-tags base,azure
+          path: './src'
 
   SCA:
     runs-on: ubuntu-latest
@@ -60,7 +57,7 @@ jobs:
         run: dotnet publish -c Release -o ./myapp --property WarningLevel=0
         working-directory: ./src
 
-      - name: scan OSS with Spectral
+      - name: scan SCA with Spectral
         uses: spectralops/spectral-github-action@v3
         with:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
