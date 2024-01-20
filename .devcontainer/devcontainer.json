@@ -1,0 +1,22 @@
+{
+  "name": "ASP.NET Core 6 Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-6.0-jammy",
+
+  "customizations": {
+    "prompt": "dotnet: ",
+    "welcomeBanner": "Welcome to .NET 6!",
+    "vscode": {
+      "extensions": ["ms-dotnettools.csharp", "ms-dotnettools.csdevkit"],
+      "settings": { "terminal.integrated.shell.linux": "/bin/bash" }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        ".vscode/app-innovation-day.code-workspace",
+        "src/Program.cs"
+      ]
+    }
+  },
+  "forwardPorts": [5000, 5001],
+  "postCreateCommand": "cd ./src && dotnet restore"
+}

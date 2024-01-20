@@ -9,14 +9,14 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CafeReadConf.csproj", "."]
-RUN dotnet restore "./././CafeReadConf.csproj"
+RUN dotnet restore "./././frontend/CafeReadConf.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "./CafeReadConf.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./frontend/CafeReadConf.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./CafeReadConf.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./frontend/CafeReadConf.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
