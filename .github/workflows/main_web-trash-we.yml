@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    working-directory: ./src/frontend
 
     steps:
       - uses: actions/checkout@v4
@@ -24,12 +23,15 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./src/frontend
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./src/frontend
         run: dotnet publish -c Release -o ${{github.workspace}}/myapp
 
       - name: Upload artifact for deployment job
+        working-directory: ./src/frontend
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
@@ -37,7 +39,6 @@ jobs:
 
   deploy:
     runs-on: windows-latest
-    working-directory: ./src/frontend
     needs: build
     environment:
       name: "Production"
@@ -45,12 +46,14 @@ jobs:
 
     steps:
       - name: Download artifact from build job
+        working-directory: ./src/frontend
         uses: actions/download-artifact@v3
         with:
           name: .net-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
+        working-directory: ./src/frontend
         uses: azure/webapps-deploy@v2
         with:
           app-name: "web-trash-we"
