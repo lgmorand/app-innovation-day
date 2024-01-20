@@ -54,6 +54,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: "web-trash-we"
-          slot-name: "Production"
+          slot-name: "Dev"
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F473CD6D0D4A49DDBB2D956EDF22F40C }}
