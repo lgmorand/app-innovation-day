@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# Accept pipeline tmp files
-!./github/**/*.yaml.tmp
-
 # User-specific files
 *.rsuser
 *.suo
@@ -399,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Whitelist
+# Accept pipeline tmp files
+!.github/**/*.yaml.tmp
