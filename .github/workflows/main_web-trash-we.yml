@@ -31,8 +31,8 @@ jobs:
         run: dotnet publish -c Release -o ${{github.workspace}}/myapp
 
       - name: Upload artifact for deployment job
-        working-directory: ./src/frontend
         uses: actions/upload-artifact@v3
+        working-directory: ./src/frontend
         with:
           name: .net-app
           path: ${{github.workspace}}/myapp
