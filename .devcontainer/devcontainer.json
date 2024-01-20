@@ -1,7 +1,9 @@
 {
   "name": "ASP.NET Core 6 Dev Container",
   "image": "mcr.microsoft.com/devcontainers/dotnet:1-6.0-jammy",
-
+  "features": {
+    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
+  },
   "customizations": {
     "prompt": "dotnet: ",
     "welcomeBanner": "Welcome to .NET 6!",
