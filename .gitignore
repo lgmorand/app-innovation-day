@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Accept pipeline tmp files
+!./github/**/*.tmp
+
 # User-specific files
 *.rsuser
 *.suo
