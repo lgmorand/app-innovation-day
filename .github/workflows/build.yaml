@@ -51,11 +51,11 @@ jobs:
         uses: actions/setup-dotnet@v4
 
       - name: Restore dependencies
-        run: dotnet restore ./src/CafeReadConf.sln
+        run: dotnet restore ./src/frontend/CafeReadConf.sln
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ./myapp --property WarningLevel=0
-        working-directory: ./src/fronted
+        working-directory: ./src/frontend
 
       - name: scan SCA with Spectral
         uses: spectralops/spectral-github-action@v3
@@ -68,7 +68,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=snyk.sarif --file=./src/CafeReadConf.sln --severity-threshold=medium
+          args: --sarif-file-output=snyk.sarif --file=./src/frontend/CafeReadConf.sln --severity-threshold=medium
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
@@ -105,7 +105,7 @@ jobs:
         uses: actions/setup-dotnet@v4
 
       - name: Restore dependencies
-        run: dotnet restore ./src/CafeReadConf.sln
+        run: dotnet restore ./src/frontend/CafeReadConf.sln
 
       - name: Build
         run: dotnet build --no-restore --configuration Release --property WarningLevel=0
@@ -138,9 +138,9 @@ jobs:
         id: deploy-to-webapp-dev
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "innovationday-dev"
-          slot-name: "production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DEV }}
+          app-name: "web-trash-we"
+          slot-name: "Dev"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E9CFA327E71D49F198BE8CAA8051BE78 }}
           package: .
 
   DAST:
@@ -194,7 +194,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "innovationday"
+          app-name: "web-trash-we"
           slot-name: "production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E4458A4B260496ABF1A40FBAEE44461 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E9CFA327E71D49F198BE8CAA8051BE78 }}
           package: .
