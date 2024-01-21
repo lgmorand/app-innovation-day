@@ -13,12 +13,13 @@ namespace CafeReadConf.Pages
         public string Secret { get; set; }
         public List<User> Users { get; set; }
 
+        public void OnGet(){}
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
             Secret = GetConfig("secret");
             ReadItems(Secret);
-
         }
 
         /// <summary>
