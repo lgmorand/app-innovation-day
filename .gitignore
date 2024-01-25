@@ -86,7 +86,6 @@ StyleCopReport.xml
 *.tlb
 *.tli
 *.tlh
-*.tmp
 *.tmp_proj
 *_wpftmp.csproj
 *.log
@@ -382,7 +381,7 @@ FodyWeavers.xsd
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+!*.code-workspace
 
 # Local History for Visual Studio Code
 .history/
@@ -400,3 +399,7 @@ FodyWeavers.xsd
 # Whitelist
 # Accept pipeline tmp files
 !.github/**/*.yaml.tmp
+
+__azurite_**
+
+!*.tmp

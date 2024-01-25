@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeReadConf", "CafeReadConf.csproj", "{1296070D-030E-4EAB-A38A-FD6E74AAF694}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "..\backend\backend.csproj", "{0CCAFD10-D037-4824-B240-2FF73A1F5B89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1296070D-030E-4EAB-A38A-FD6E74AAF694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1296070D-030E-4EAB-A38A-FD6E74AAF694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1296070D-030E-4EAB-A38A-FD6E74AAF694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CCAFD10-D037-4824-B240-2FF73A1F5B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCAFD10-D037-4824-B240-2FF73A1F5B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCAFD10-D037-4824-B240-2FF73A1F5B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCAFD10-D037-4824-B240-2FF73A1F5B89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

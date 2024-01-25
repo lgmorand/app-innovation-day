@@ -1,14 +1,26 @@
 {
-  "name": "ASP.NET Core 6 Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/dotnet:1-6.0-jammy",
+  "name": "ASP.NET Core 8 Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-jammy",
   "features": {
-    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
+    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
+    "azure-cli": {
+      "version": "latest"
+    }
   },
   "customizations": {
     "prompt": "dotnet: ",
-    "welcomeBanner": "Welcome to .NET 6!",
+    "welcomeBanner": "Welcome to .NET 8!",
     "vscode": {
-      "extensions": ["ms-dotnettools.csharp", "ms-dotnettools.csdevkit"],
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-vsliveshare.vsliveshare",
+        // Azurite : Storage Account Emulator for local Azure Function Debug
+        "azurite.azurite",
+        // Language related extensions
+        "humao.rest-client"
+      ],
       "settings": { "terminal.integrated.shell.linux": "/bin/bash" }
     },
     "codespaces": {
@@ -19,6 +31,6 @@
       ]
     }
   },
-  "forwardPorts": [5000, 5001],
-  "postCreateCommand": "cd ./src && dotnet restore"
+  "forwardPorts": [5000, 5001, 7071, 10000, 10001, 10002],
+  "postCreateCommand": "cd ./src/frontend && dotnet dev-certs https --trust && dotnet restore && cd ../backend && dotnet restore"
 }

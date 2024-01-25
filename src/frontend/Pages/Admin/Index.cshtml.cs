@@ -23,14 +23,12 @@ namespace CafeReadConf.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync()
         {
+
+            
             var request = new HttpRequestMessage(
             HttpMethod.Get,
-            _configuration["BACKEND_API_URL"])
-            {
-                Headers =
-                {
-                    { HeaderNames.Accept, "application/json"}
-                }
+            new Uri(baseUri: new Uri(_configuration["BACKEND_API_URL"]), relativeUri: "api/secret")){
+                Headers ={{ HeaderNames.Accept, "application/json"}}
             };
 
             var client = _clientFactory.CreateClient();
