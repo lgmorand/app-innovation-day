@@ -6,10 +6,13 @@ namespace CafeReadConf.Pages
 {
     public class IndexModel : PageModel
     {
+        // Services DI 
         private readonly ILogger<IndexModel> _logger;
-        public string? Secret { get; set; }
-        public List<UserEntity> Users { get; set; }
+
         public IUserService _userService { get; set; }
+        private readonly IConfiguration _configuration;
+
+        public List<UserEntity> Users { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger,
         IUserService userService,
@@ -17,8 +20,7 @@ namespace CafeReadConf.Pages
         {
             _logger = logger;
             _userService = userService;
-
-            Secret = configuration.GetValue<string>("secret");
+            _configuration = configuration;
         }
 
         public async Task OnGetAsync()

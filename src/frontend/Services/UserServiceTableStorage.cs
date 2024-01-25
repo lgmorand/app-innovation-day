@@ -10,7 +10,12 @@ namespace CafeReadConf
 {
     public class UserServiceTableStorage : IUserService
     {
-        public UserServiceTableStorage(IConfiguration configuration) : base(configuration) { }
+
+        public UserServiceTableStorage(
+            IConfiguration configuration,
+            ILogger<UserServiceTableStorage> logger,
+            UserEntityFactory userEntityFactory) : base(configuration, logger, userEntityFactory) { }
+
 
         /// <summary>
         /// Get TableClient from Azure Table Storage
@@ -22,9 +27,7 @@ namespace CafeReadConf
 
             if (string.IsNullOrEmpty(this._tableStorageConnectionString)) // mode MSI
             {
-                serviceClient = new TableServiceClient(
-                    new Uri(this._tableStorageUri),
-                    new DefaultAzureCredential());
+                serviceClient = new TableServiceClient(new Uri(this._tableStorageUri), new DefaultAzureCredential());
             }
             else // mode connection string
             {
@@ -55,6 +58,17 @@ namespace CafeReadConf
             }
 
             return users;
+        }
+        
+        /// <summary>
+        /// Add a user to Azure Table Storage
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+
+        public override async Task AddUser(Usermodel input)
+        {
+            throw new NotImplementedException();
         }
     }
 }
