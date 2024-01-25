@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AZURE_TABLE_STORAGE_ACCOUNT__tableServiceUri": "https://stoappinnoday.table.core.windows.net",
+    "AZURE_TABLE_STORAGE_ACCOUNT__tenantId": "",
+    "AZURE_TABLE_STORAGE_ACCOUNT__clientId": "",
+    "AZURE_TABLE_STORAGE_ACCOUNT__clientSecret": "",
+    "AZURE_TABLE_SOURCE": "users",
+    "AZURE_TABLE_PARTITION_KEY": "users"
+  }
+}

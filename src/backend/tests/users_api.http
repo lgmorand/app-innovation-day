@@ -1,0 +1,35 @@
+@requestUri = "Users"
+@baseAddress = "localhost"
+@port = 7071
+
+###
+
+# Create a user in a table storage configured in the local.settings.json file
+POST http://localhost:7071/api/Users
+Content-Type: application/json
+
+{
+    "FirstName": "John",
+    "LastName": "Le plus fort"
+}
+
+###  
+
+#Get the 50 first users
+
+GET http://{{baseAddress}}:{{port}}/api/{{requestUri}}
+
+###
+
+#Get a specific user
+
+GET http://localhost:7071/api/Users/1
+
+###
+
+GET http://localhost:7071/api/Users/
+
+
+###
+
+POST https://login.microsoftonline.com/dbf66fc6-f491-4387-b638-101810058f9c/oauth2/token?api-version=1.0

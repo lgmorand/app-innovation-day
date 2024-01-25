@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../src/frontend",
+      "name": "Part 1 - Frontend"
+    },
+    {
+      "path": "../src/backend",
+      "name": "Part 1 - Backend"
+    }
+  ],
+  "settings": {
+    "azurite.location": "/tmp"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [],
+    "compounds": [
+      {
+        "name": "Debug Frontend + Backend",
+        "configurations": ["Attach to .NET Functions", ".NET Core Launch (web)"]
+      }
+    ]
+  }
+}
