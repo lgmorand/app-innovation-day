@@ -6,7 +6,7 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "secret": "",
+  "SECRET": "",
   "BACKEND_API_URL": "http://localhost:7071/",
   "AZURE_TABLE_PARTITION_KEY":"users",
   "AZURE_TABLE_STORAGE_URI": "https://stoappinnoday.table.core.windows.net",

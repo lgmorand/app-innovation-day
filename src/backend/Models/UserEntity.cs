@@ -17,9 +17,11 @@ namespace CafeReadConf.Backend.Models
         public string LastName { get; set; }
 
         [JsonPropertyName("PartitionKey")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public string PartitionKey { get; set; }
 
         [JsonPropertyName("RowKey")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public string RowKey { get; set; }
 
         [JsonPropertyName("Timestamp")]

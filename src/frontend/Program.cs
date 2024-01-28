@@ -1,51 +1,35 @@
+using System.Configuration;
+using System.Security.Claims;
 using CafeReadConf;
 using CafeReadConf.Frontend.Models;
 using CafeReadConf.Frontend.Service;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.Resource;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Identity.Web.UI;
+using CafeReadConf.Configure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
 
 // Validate configuration contains the mandatory settings
 var config = builder.Configuration;
 
-builder.Services.AddSingleton<UserEntityFactory>();
+//Make sure all the critical configs are set before proceeding
+config.ValidateCriticalConfig();
 
-// UserService Conditional Dependency Injection based on Backend API URL configuration 
-if (string.IsNullOrEmpty(config["BACKEND_API_URL"]))
-{
-    // If no backend API URL is provided, we assume we are connecting to TableStorage directly from the frontend
-    builder.Services.AddSingleton<IUserService, UserServiceTableStorage>();
-}
-else
-{
-    builder.Services.AddHttpClient("ApiBaseAddress", client =>
-    {
+// Add services to the container based on the Service configuration custom class 
+builder.Services.ConfigureServices(config);
 
-        client.BaseAddress = new Uri(config["BACKEND_API_URL"]);
-    });
-    // If backend API URL is provided, we assume we are connecting to the Azure Function backend API
-    builder.Services.AddSingleton<IUserService, UserServiceAPI>();
-}
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
+//Build the app with the expected Use directives
+var app = builder.Build()
+    .ConfigureAppPipeline(builder.Environment);
 
 app.Run();
