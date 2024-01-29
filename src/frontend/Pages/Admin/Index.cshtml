@@ -1,0 +1,62 @@
+@page
+@model CafeReadConf.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Admin Page";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="~/img/logo.jpeg" width="200px" />
+        </div>
+    </div>
+
+    @if(Model.IsApiUrlSet)
+    {
+        <form method="post">
+            <div class="row">
+                <div class="col">
+                    <label for="user-name">Add a new user</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">User name</span>
+                        </div>
+                        <input asp-for="Input.FirstName" type="text" class="form-control" id="user-name" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">User description</span>
+                        </div>
+                        <input asp-for="Input.LastName" type="text" class="form-control" id="user-desc" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Add New User</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div asp-validation-summary="All"class text-danger"></div>
+                </div>
+            </div>
+        </form>
+    }
+    @if(!String.IsNullOrEmpty(TempData["UserAddedOK"]?.ToString()))
+    {
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success" role="alert">
+                    @TempData["UserAddedOK"]
+                </div>
+            </div>
+        </div>        
+    }
+</div>

@@ -1,0 +1,14 @@
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "SECRET": "",
+  "BACKEND_API_URL": "http://localhost:7071/",
+  "AZURE_TABLE_PARTITION_KEY":"users",
+  "AZURE_TABLE_STORAGE_URI": "https://stoappinnoday.table.core.windows.net",
+  "AZURE_TABLE_STORAGE_TABLENAME": "usersdev"
+}
