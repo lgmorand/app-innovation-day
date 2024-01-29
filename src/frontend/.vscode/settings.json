@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "bin/Release/net8.0/publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/735a4022-4b84-41dc-8200-dc028954e80d/resourceGroups/rg-innovationday/providers/Microsoft.Web/sites/web-trash-we"
+}

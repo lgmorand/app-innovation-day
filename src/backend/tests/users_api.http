@@ -9,8 +9,8 @@ POST http://localhost:7071/api/Users
 Content-Type: application/json
 
 {
-    "FirstName": "John",
-    "LastName": "Le plus fort"
+    "FirstName":"David",
+    "LastName":"David"
 }
 
 ###  

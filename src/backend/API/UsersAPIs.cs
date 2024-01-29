@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Azure.Data.Tables;
 using System;
+using Azure.Identity;
 
 namespace CafeReadConf.Backend.API
 {
@@ -43,12 +44,12 @@ namespace CafeReadConf.Backend.API
 
         [Function(nameof(CreateUser))]
         public CreateUserOutput CreateUser(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "Users")] HttpRequestData req,
-            [FromBody] UserEntity UserEntity)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Users")] HttpRequestData req,
+            [FromBody] UserEntity userEntity)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("Adding a new User in the table : {}", JsonSerializer.Serialize<UserEntity>(userEntity));
 
-            var user = _userEntityFactory.CreateUserEntity(UserEntity.FirstName, UserEntity.LastName);
+            var user = _userEntityFactory.CreateUserEntity(userEntity.FirstName, userEntity.LastName);
 
             var newUser = new
             {
@@ -102,7 +103,7 @@ namespace CafeReadConf.Backend.API
 
         [Function(nameof(GetUsers))]
         public HttpResponseData GetUsers(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Users")] HttpRequestData req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Users")] HttpRequestData req,
             [TableInput(
                 tableName: "%AZURE_TABLE_SOURCE%",
                 partitionKey: "%AZURE_TABLE_PARTITION_KEY%",
