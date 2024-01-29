@@ -140,9 +140,9 @@ jobs:
         id: deploy-to-webapp-dev
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "web-trash-we"
+          app-name: "innovationday-dev"
           slot-name: "Dev"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E9CFA327E71D49F198BE8CAA8051BE78 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DEV }}
           package: .
 
   DAST:
@@ -196,7 +196,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "web-trash-we"
+          app-name: "innovationday"
           slot-name: "production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E9CFA327E71D49F198BE8CAA8051BE78 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E4458A4B260496ABF1A40FBAEE44461 }}
           package: .
