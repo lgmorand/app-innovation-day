@@ -141,7 +141,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: "innovationday-dev"
-          slot-name: "Dev"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DEV }}
           package: .
 
@@ -197,6 +196,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: "innovationday"
-          slot-name: "production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E4458A4B260496ABF1A40FBAEE44461 }}
           package: .
