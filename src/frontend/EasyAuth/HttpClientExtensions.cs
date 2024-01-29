@@ -9,21 +9,21 @@ namespace CafeReadConf.EasyAuth.HttpClientExtensions
             var accessToken = _httpClientAccessor
                     .HttpContext.User.FindFirst("access_token")?.Value;
 
-            _logger.LogInformation("Claimsprincipals : {claims}", _httpClientAccessor
-                    .HttpContext.User.Claims.ToList().ToString());
-
             if (accessToken == null)
             {
                 accessToken = _httpClientAccessor.HttpContext.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"].ToString();
 
-                _logger.LogInformation("Found X-MS-TOKEN-AAD-ACCESS-TOKEN : {accessToken}", accessToken);
+                _logger.LogInformation("Found X-MS-TOKEN-AAD-ACCESS-TOKEN in http context : setting accessToken");
             }
 
             if (accessToken != null)
             {
-                _logger.LogInformation("Found Access Token : {accessToken}", accessToken);
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                _logger.LogInformation("Set Authorization Header : {accessToken}", httpClient.DefaultRequestHeaders.Authorization.ToString());
+                _logger.LogInformation("Set Authorization Header with the access token");
+
+                // Kept for debug purposes 
+                // _logger.LogInformation("Set Authorization Header with the access token : {accessToken}", httpClient.DefaultRequestHeaders.Authorization.ToString());
+
             }
         }
     }
