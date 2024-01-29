@@ -4,15 +4,8 @@ on:
   push:
   workflow_dispatch:
 
-inputs:
-  devsecops:
-    description: "Enable or disable devsecops"
-    required: false
-    default: "false"
-
 jobs:
   secrets:
-    if: ${{ github.event.inputs.devsecops == 'true' }}
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -26,7 +19,6 @@ jobs:
           spectral-args: scan --ok --engines secrets --include-tags base,audit
 
   IaC:
-    if: ${{ github.event.inputs.devsecops == 'true' }}
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -39,7 +31,6 @@ jobs:
           spectral-dsn: ${{ env.SPECTRAL_DSN }}
           spectral-args: scan --ok --engines iac --include-tags base,azure
   SAST:
-    if: ${{ github.event.inputs.devsecops == 'true' }}
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -50,7 +41,6 @@ jobs:
           path: "./src/frontend"
 
   SCA:
-    if: ${{ github.event.inputs.devsecops == 'true' }}
     runs-on: ubuntu-latest
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
@@ -86,7 +76,6 @@ jobs:
           sarif_file: snyk.sarif
 
   Docker:
-    if: ${{ github.event.inputs.devsecops == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
