@@ -15,7 +15,7 @@ namespace CafeReadConf.Frontend.Service
         {
             _logger = logger;
             _userEntityFactory = userEntityFactory;
-            _tableStorageConnectionString = config.GetValue<string>("secret");
+            _tableStorageConnectionString = config.GetValue<string>("SECRET");
             _tableStorageUri = config.GetValue<string>("AZURE_TABLE_STORAGE_URI");
             _tableName = config.GetValue<string>("AZURE_TABLE_STORAGE_TABLENAME") ?? DEFAULT_TABLE_NAME;
         }
