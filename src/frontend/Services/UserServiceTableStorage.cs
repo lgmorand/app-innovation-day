@@ -27,10 +27,12 @@ namespace CafeReadConf
 
             if (string.IsNullOrEmpty(this._tableStorageConnectionString)) // mode MSI
             {
+                this._logger.LogInformation("Using MSI to connect to Azure Table Storage");
                 serviceClient = new TableServiceClient(new Uri(this._tableStorageUri), new DefaultAzureCredential());
             }
             else // mode connection string
             {
+                this._logger.LogInformation("Using connection string to connect to Azure Table Storage");
                 serviceClient = new TableServiceClient(this._tableStorageConnectionString);
             }
 
