@@ -10,7 +10,7 @@ jobs:
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: scan secrets with Spectral
         uses: spectralops/spectral-github-action@v3
@@ -23,7 +23,7 @@ jobs:
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: scan IaC with Spectral
         uses: spectralops/spectral-github-action@v3
@@ -35,7 +35,7 @@ jobs:
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: bearer/bearer-action@v2
         with:
           path: "./src/frontend"
@@ -45,7 +45,7 @@ jobs:
     env:
       SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -78,7 +78,7 @@ jobs:
   Docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: hadolint
         run: |
@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -118,7 +118,7 @@ jobs:
         working-directory: ./src/frontend
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: .net-app
           path: ./src/frontend/myapp
@@ -149,7 +149,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.8.0
         with:
@@ -164,7 +164,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Login to Azure
         uses: azure/login@v1
         continue-on-error: false
