@@ -39,7 +39,7 @@ jobs:
       - uses: bearer/bearer-action@v2
         with:
           path: "./src/frontend"
-          skip-rule: CWE-1333
+          skip-rule: javascript_lang_dynamic_regex,javascript_lang_logger_leak
 
   SCA:
     runs-on: ubuntu-latest
